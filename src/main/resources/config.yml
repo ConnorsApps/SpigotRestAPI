@@ -1,2 +1,18 @@
-port: 8765                      # the port the http server should listen on
-cors: false                     # cross site support
+# port: 8765                      # the port the http server should listen on
+# cors:                           # CORS Configuration
+#    enabled: false               # If is Enabled
+#    multiple: false              # If you had multiple origins
+#    origin: 'null'               # The single orign; Use '*' as wild card or 'http://youriste.com'
+
+#    If 'multiple' is enabled
+
+#    origins:
+#    - http://yoursite.dom
+#    - http://mysite.dom
+#    - http://theysite.dom
+  
+port: 8765
+cors:
+    enabled: false
+    multiple: false
+    origin: 'null'

@@ -10,6 +10,9 @@ import org.apache.commons.lang.exception.ExceptionUtils;
 import org.bukkit.configuration.file.FileConfiguration;
 import org.bukkit.plugin.java.JavaPlugin;
 
+import java.util.ArrayList;
+import java.util.List;
+
 import static spark.Spark.*;
 
 public class SpigotRestAPI extends JavaPlugin {
@@ -28,10 +31,20 @@ public class SpigotRestAPI extends JavaPlugin {
         before((req, res) -> {
             res.type("application/json");
 
-            if (config.getBoolean("cors")) {
-                res.header("Access-Control-Allow-Origin", "*");
-                res.header("Access-Control-Allow-Methods", "GET");
-                res.header("Access-Control-Allow-Methods", "POST");
+            if (config.getBoolean("cors.enabled")) {
+                if (config.getBoolean("cors.multiple")) {
+                    List<String> origins = config.getStringList("cors.origins");
+                    for (String origin : origins) {
+                        res.header("Access-Control-Allow-Origin", origin);
+                    }
+                } else {
+                    String defaultOrigin = config.getBoolean("cors.enabled") ? "*" : "null";
+                    res.header("Access-Control-Allow-Origin", config.getString("cors.origin", defaultOrigin));
+                }
+
+                res.header("Access-Control-Allow-Methods", "GET, POST, PUT, PATCH, DELETE, OPTIONS");
+                res.header("Access-Control-Allow-Headers", "Origin, Content-Type, Accept, Authorization");
+                res.header("Access-Control-Allow-Credentials", "true");
             }
         });
 
@@ -60,7 +73,9 @@ public class SpigotRestAPI extends JavaPlugin {
     private void setupConfig () {
         this.config = this.getConfig();
         this.config.addDefault("port", 8765);
-        this.config.addDefault("cors", false);
+        this.config.addDefault("cors.enabled", false);
+        this.config.addDefault("cors.origin", "null");
+        this.config.addDefault("cors.multiple", false);
         this.saveConfig();
     }
 
