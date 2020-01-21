@@ -1,4 +1,4 @@
 name: SpigotRestAPI
 version: 1.5.2
-main: io.wlf.mc.SpigotRestAPI.SpigotRestAPI
+main: im.dnn.SpigotRestAPI.SpigotRestAPI
 api-version: 1.15
