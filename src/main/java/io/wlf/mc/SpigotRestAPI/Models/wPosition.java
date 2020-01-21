@@ -8,11 +8,11 @@ public class wPosition {
     public double z;
     public String world;
 
-    public wPosition(Location l) {
-        this.fromLocation(l);
+    public wPosition (Location l) {
+        this.fromLocation (l);
     }
 
-    public void fromLocation(Location loc) {
+    public void fromLocation (Location loc) {
         if (loc != null) {
             this.x = loc.getX();
             this.y = loc.getY();

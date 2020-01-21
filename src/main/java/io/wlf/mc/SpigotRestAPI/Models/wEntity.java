@@ -8,14 +8,13 @@ public class wEntity {
     public String uuid;
     public wPosition position;
 
-    public wEntity() {
-    }
+    public wEntity () {}
 
-    public wEntity(Entity e) {
+    public wEntity (Entity e) {
         this.fromBukkit(e);
     }
 
-    public void fromBukkit(Entity e) {
+    public void fromBukkit (Entity e) {
         if (e != null) {
             this.position = new wPosition(e.getLocation());
             this.uuid = e.getUniqueId().toString();

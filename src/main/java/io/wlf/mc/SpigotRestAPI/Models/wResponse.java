@@ -4,11 +4,11 @@ public class wResponse {
     public String status;
     public Object data;
 
-    public wResponse(String status){
+    public wResponse (String status){
         this.status = status;
     }
 
-    public wResponse(String status, Object data) {
+    public wResponse (String status, Object data) {
         this.status = status;
         this.data = data;
     }
